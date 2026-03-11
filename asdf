@@ -1,0 +1,223 @@
+https://sites.google.com/view/krisonparadise
+
+use web browser to visit this website 
+
+now use this website and copy their content into ours use the images from the assets folder images to be displayed on our website and use relevant containers or create new containers in inspo from the screenshots to be added to our website alright 
+
+
+
+
+🏔️ Production-Ready Stitch Prompt — The Haven Cabin Resort
+
+a. PROJECT OVERVIEW
+(from raw prompt only)
+The Haven is a luxury cabin/resort property website — a single-page, scroll-driven editorial experience. The existing codebase has five core sections: a full-screen hero, a minimalist text intro, a split philosophy layout, a draggable Swiper gallery on a sage-green background, and a dark footer. The goal is to enhance this existing page with:
+
+Elevated visual design lifted from the Johannis hotel reference (typography weight contrast, soft-warm-neutral tones, spacious white-space rhythm, asymmetric image-text splits, icon-row amenity strips).
+Full GSAP 3 animation layer: hero text reveal, scroll-triggered fade/slide-ins, horizontal parallax on images, staggered letter or word splitting on headlines, and a smooth navbar morph on scroll.
+No new pages — deepen and enrich what exists.
+
+
+b. VISUAL LANGUAGE
+(from design reference — johannis.it — only)
+Color Palette:
+
+#F5F0E8 — warm parchment / off-white background (primary surface)
+#2B2417 — deep espresso brown (primary text, headings)
+#8C7B5E — warm taupe/khaki (secondary text, dividers, icon strokes)
+#C9B99A — muted sand gold (accent, CTA hover states)
+#4A5240 — dark forest green (used sparingly, philosophy section text)
+#9EAB88 — muted sage (gallery section background — already in code, keep)
+#1A1A1A — near-black (footer — already in code, keep)
+
+Typography:
+
+Display / Headings: Serif typeface (Cormorant Garamond or Playfair Display), weight 300–400, size scale: 72px → 56px → 40px → 28px. Extremely wide letter-spacing on uppercase labels (tracking: 0.3–0.5em). Italic variants used for tonal contrast within headlines.
+Body / Labels: Sans-serif (Inter or DM Sans), weight 300 (light), size 12–14px, letter-spacing 0.2em, uppercase for all nav and label items.
+Section Index Labels: Single roman numeral I, II, III inside a 1px bordered box — tiny text 0.55rem, tracking 0.35em. Centered, used as visual chapter markers.
+
+Spacing & Layout:
+
+Generous vertical padding: 120px top/bottom on all sections (desktop), 64px mobile.
+Max content width: 1280px, centered.
+Image-text splits: 55% image / 45% text, or 45% / 55% alternating per section. Images always bleed to section edge, no rounded corners, no shadows.
+Thin 1px horizontal rules in #E8E2D8 between sections.
+Micro-spacing: 32px gap between label → headline → body → CTA within a text block.
+
+Component Styles:
+
+Navbar: Transparent on hero, morphs to rgba(245,240,232,0.97) with backdrop-filter: blur(12px) and border-bottom: 1px solid #E8E2D8 on scroll. Logo centered, links flanking left/right. Text switches from white → #2B2417 on scroll.
+CTA Buttons: Two styles: (1) pill-shaped outlined border: 1px solid #2B2417, border-radius: 50px, padding: 14px 40px, hover fills #2B2417 with white text — smooth 400ms transition; (2) rectangular outlined border: 1px solid rgba(255,255,255,0.5) for hero overlay.
+Amenity Icon Strip: Row of 3–4 thin-line icons with a short label below each, centered, 1px dividers between, background #F5F0E8, padding 48px 0. Icons are stroke-only, 24x24px.
+Gallery Cards (Room Cards): Full-bleed image top, minimal text below — suite name in serif 18px, spec line in sans 11px #8C7B5E, price in serif 16px. No card border, no shadow. Cards sit on #F5F0E8 background.
+
+Animation / Interaction Feel:
+
+Slow, deliberate. Nothing snappy. Eases are power2.out or expo.out.
+Images have a subtle scale-up parallax on scroll (scale: 1.05 → 1.0 as they enter viewport).
+Text lines reveal with a clip-path mask: clipPath: "inset(0 100% 0 0)" → "inset(0 0% 0 0)".
+Navbar logo fades in on load with y: -20 → 0, opacity: 0 → 1, duration 1.2s.
+Section divider lines draw in from left: scaleX: 0 → 1, transformOrigin: left.
+Hover on image blocks: very slow scale(1.03) zoom, transition: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94).
+Overall mood: warm editorial luxury — think Kinfolk magazine meets Alpine hotel brochure. Generous breathing room. Never rushed.
+
+
+c. PAGE-BY-PAGE UI PLAN
+SECTION 0 — Navbar (upgrade existing)
+
+Keep 3-column layout (links | logo | links + CTA).
+Add GSAP onLoad animation: stagger nav links from y: -30, opacity: 0 → y: 0, opacity: 1, 0.1s stagger, starting after 0.8s page load.
+On scroll past 80px: add class scrolled → background morphs to rgba(245,240,232,0.97), text color #2B2417, border-bottom 1px solid #E8E2D8. GSAP .to() drives this smoothly.
+
+SECTION 1 — Hero (upgrade existing)
+
+Keep full-screen background image structure.
+REPLACE CSS fade with GSAP timeline on page load:
+
+h1 words split via SplitText (or manual <span> wrapping per word), each word animates y: 60 → 0, opacity: 0 → 1 with stagger: 0.08s, ease: expo.out, duration: 1.4s.
+The vertical 1px line: scaleY: 0 → 1, transformOrigin: top, duration: 0.8s, delay: 1.6s.
+Subtitle text: y: 20 → 0, opacity: 0 → 1, delay: 2s.
+Scroll arrow: pulses with GSAP yoyo: true repeat rather than CSS animate-bounce.
+
+
+Add a hero overlay gradient: background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.5) 100%).
+
+SECTION 2 — Minimalist Text Intro (upgrade existing)
+
+Keep the roman numeral I chapter badge and centered headline.
+Upgrade animation: ScrollTrigger drives clipPath reveal on each headline line — inset(0 100% 0 0) → inset(0 0% 0 0), staggered 0.15s per line, duration: 1s, ease: expo.out.
+NEW: Add an Amenity Icon Strip below the CTA button. Three icons in a horizontal row on #F5F0E8 background: (1) Forest & Nature, (2) Private Spa / Sauna, (3) Mountain Views. Each icon is a 24px SVG stroke, label below in sans 10px uppercase #8C7B5E, separated by 1px vertical dividers in #E8E2D8. Full-width strip, padding: 48px 0, margin-top: 80px.
+
+SECTION 3 — Philosophy Split (upgrade existing)
+
+Keep the 50/50 image-text split layout.
+Image side: wrap in a overflow: hidden container. On ScrollTrigger enter, image scales from scale: 1.1 → 1.0 and x: 30 → 0, duration: 1.6s, ease: expo.out. Creates a cinematic "settle in" feel.
+Text side: headline does clipPath line-by-line reveal. Body paragraph fades opacity: 0 → 1, y: 20 → 0, delay: 0.4s after headline. CTA link does x: -20 → 0, opacity: 0 → 1, delay: 0.8s.
+NEW: Add a second split block below (inverted — image left, text right), separated by 80px padding. Text content: "Where the Forest Meets Luxury" as heading, short body about the cabin architecture. Image: a second Unsplash nature/cabin photo. This mirrors the Johannis reference's multi-row room detail layout.
+Add a thin 1px horizontal rule in #E8E2D8 at section top and bottom, drawn in via GSAP scaleX animation.
+
+SECTION 4 — Gallery (Swiper) (upgrade existing)
+
+Keep sage #9EAB88 background and Swiper structure.
+Add a section header (was empty in existing code): Left-aligned serif headline "Curations" in #2B2417, 48px, above the swiper. Below it, roman numeral III badge. Both animate in from y: 40 → 0, opacity: 0 → 1 on scroll.
+Swiper slides: on slide change, outgoing slide does scale: 1.05 → 1.0 exit; incoming slide does x: 60 → 0, opacity: 0.6 → 1. GSAP drives these inside Swiper's on: { slideChangeTransitionStart } callback.
+Custom cursor (already exists in HTML): ensure it scales up scale(1.4) on hover over swiper container via GSAP .to().
+
+SECTION 5 — Footer (upgrade existing)
+
+Keep dark #1A1A1A background and structure.
+On ScrollTrigger enter: Logo text does character-by-character stagger opacity: 0 → 1, y: 10 → 0, stagger: 0.04s.
+Add a thin 1px top border in #333 with scaleX: 0 → 1 draw-in animation.
+Add three footer columns above social links: Address, Reservations (phone/email), Follow (social). Each in sans 11px #666, heading in serif 13px #888.
+
+
+d. COMPONENT SPECS
+Color Tokens:
+--color-parchment:   #F5F0E8
+--color-espresso:    #2B2417
+--color-taupe:       #8C7B5E
+--color-sand-gold:   #C9B99A
+--color-forest:      #4A5240
+--color-sage:        #9EAB88
+--color-near-black:  #1A1A1A
+--color-gold-accent: #C5A059   (existing — keep)
+--color-rule:        #E8E2D8
+Typography Scale:
+Display (H1):    Cormorant Garamond, 400, 72–80px, tracking 0.02em
+Heading (H2):    Cormorant Garamond, 300, 48–56px, tracking 0.05em
+Sub-heading (H3):Cormorant Garamond, 400 italic, 32px
+Label / Nav:     Inter or DM Sans, 300, 10–11px, tracking 0.3em, uppercase
+Body:            Inter, 300, 14px, tracking 0.01em, line-height 1.8
+Caption / Price: Cormorant Garamond, 400, 16px
+Chapter Badge:   Inter, 300, 9px, tracking 0.4em, uppercase, in 1px bordered box
+Button Specs:
+
+Primary Outlined Pill: border: 1px solid #2B2417, border-radius: 50px, padding: 14px 48px, font Inter 300 10px uppercase tracking: 0.25em, color #2B2417. Hover: background: #2B2417, color white, transition all 500ms cubic-bezier(0.25,0.46,0.45,0.94).
+Ghost Hero CTA: border: 1px solid rgba(255,255,255,0.5), padding: 12px 32px, no border-radius, font Inter 300 10px uppercase, color white. Hover: background: white, color #2B2417.
+
+Spacing System:
+
+--space-xs: 8px | --space-sm: 16px | --space-md: 32px | --space-lg: 64px | --space-xl: 120px
+Section padding: padding: 120px 48px desktop, padding: 64px 24px mobile.
+Text block internal gap: label 32px → headline 24px → body 40px → CTA.
+
+GSAP Animation Defaults:
+
+Default ease: expo.out
+Default duration: 1.0s for text, 1.6s for images
+ScrollTrigger start: "top 80%", end: "top 40%"
+All fade-up CSS classes should be REPLACED with GSAP ScrollTrigger .from() calls for precision
+
+
+e. BUILD INSTRUCTIONS FOR STITCH
+Step 1 — Dependencies: Confirm these are loaded in <head> in this exact order: Tailwind CDN → GSAP 3.12 → GSAP ScrollTrigger → GSAP SplitText (add: https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js) → Swiper CSS → Swiper JS → Google Fonts (Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400 and Inter:wght@300;400). Link css/index.css last.
+Step 2 — CSS (css/index.css): Add these global rules on top of what exists:
+
+body { background-color: #F5F0E8; }
+.serif-font { font-family: 'Cormorant Garamond', serif; }
+.section-rule { height: 1px; background: #E8E2D8; transform: scaleX(0); transform-origin: left; }
+.img-zoom-wrap { overflow: hidden; } .img-zoom-wrap img { transition: transform 1.2s cubic-bezier(0.25,0.46,0.45,0.94); } .img-zoom-wrap:hover img { transform: scale(1.03); }
+Navbar .scrolled class: background: rgba(245,240,232,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid #E8E2D8; color: #2B2417;
+Remove all fade-up CSS transitions — GSAP will handle these.
+
+Step 3 — Navbar GSAP (js/index.js top):
+jsgsap.registerPlugin(ScrollTrigger);
+// Nav entrance
+gsap.from("#navbar a, #navbar button", { y: -30, opacity: 0, stagger: 0.08, duration: 1, ease: "expo.out", delay: 0.5 });
+// Nav scroll morph
+ScrollTrigger.create({
+  start: "top -80px",
+  onEnter: () => document.querySelector("#navbar").classList.add("scrolled"),
+  onLeaveBack: () => document.querySelector("#navbar").classList.remove("scrolled")
+});
+Step 4 — Hero GSAP: Replace static hero with GSAP timeline:
+jsconst heroTl = gsap.timeline({ delay: 0.3 });
+heroTl
+  .from(".hero-word", { y: 70, opacity: 0, stagger: 0.07, duration: 1.4, ease: "expo.out" })
+  .from(".hero-line", { scaleY: 0, transformOrigin: "top", duration: 0.8, ease: "expo.out" }, "-=0.4")
+  .from(".hero-subtitle", { y: 20, opacity: 0, duration: 0.8, ease: "expo.out" }, "-=0.2")
+  .from(".hero-scroll-arrow", { opacity: 0, duration: 0.5 });
+Wrap each word of the H1 in <span class="hero-word" style="display:inline-block">.
+Step 5 — Section Rules: Add <div class="section-rule"></div> at top of philosophy and intro sections. Animate with:
+jsgsap.utils.toArray(".section-rule").forEach(rule => {
+  gsap.to(rule, { scaleX: 1, duration: 1.2, ease: "expo.out",
+    scrollTrigger: { trigger: rule, start: "top 90%" }
+  });
+});
+Step 6 — Intro Section Headlines: Use SplitText or manual line spans. Animate:
+jsgsap.from(".intro-headline .line", {
+  clipPath: "inset(0 100% 0 0)", x: 20, stagger: 0.15, duration: 1, ease: "expo.out",
+  scrollTrigger: { trigger: ".intro-headline", start: "top 75%" }
+});
+Step 7 — Philosophy Image Parallax:
+jsgsap.from(".philosophy-img", { scale: 1.12, x: 40, duration: 1.8, ease: "expo.out",
+  scrollTrigger: { trigger: ".philosophy-img", start: "top 80%" }
+});
+Step 8 — Add Amenity Icon Strip (HTML): Below the intro section CTA, insert:
+html<div class="amenity-strip border-t border-b border-[#E8E2D8] mt-20 py-12 w-full flex justify-center gap-0">
+  <div class="flex-1 flex flex-col items-center px-8 border-r border-[#E8E2D8]">
+    <!-- SVG: tree icon stroke --> <span class="text-[10px] tracking-[0.3em] uppercase text-[#8C7B5E] mt-3">Pine Forest</span>
+  </div>
+  <div class="flex-1 flex flex-col items-center px-8 border-r border-[#E8E2D8]">
+    <!-- SVG: spa/water icon --> <span class="text-[10px] tracking-[0.3em] uppercase text-[#8C7B5E] mt-3">Private Spa</span>
+  </div>
+  <div class="flex-1 flex flex-col items-center px-8">
+    <!-- SVG: mountain icon --> <span class="text-[10px] tracking-[0.3em] uppercase text-[#8C7B5E] mt-3">Mountain Views</span>
+  </div>
+</div>
+Animate each icon item with stagger: 0.1s, y: 20 → 0, opacity: 0 → 1 on ScrollTrigger.
+Step 9 — Gallery Section Header: In the <section id="gallery"> add inside the header div:
+html<span class="border border-[#4A5240]/30 px-5 py-3 text-[0.55rem] tracking-[0.4em] uppercase text-[#4A5240]">III</span>
+<h2 class="gallery-heading serif-font text-5xl text-[#2B2417] mt-6">Curations</h2>
+Animate: gsap.from(".gallery-heading", { y: 50, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: ".gallery-heading", start: "top 80%" } });
+Step 10 — Swiper GSAP Transitions: Inside the Swiper init, add:
+json: {
+  slideChangeTransitionStart: function () {
+    gsap.from(this.slides[this.activeIndex], { x: 60, opacity: 0.5, duration: 0.9, ease: "expo.out" });
+  }
+}
+Step 11 — Footer Stagger:
+jsgsap.from(".footer-logo-char", { y: 15, opacity: 0, stagger: 0.04, duration: 0.8, ease: "expo.out",
+  scrollTrigger: { trigger: "footer", start: "top 85%" }
+});
+Step 12 — Final Polish: Set html { scroll-behavior: smooth; }. Ensure all images have loading="lazy". Set will-change: transform on all GSAP-animated image containers. Test all ScrollTrigger animations by scrubbing manually — no animation should fire before the element is 80% in viewport.

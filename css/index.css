@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #F4F2EE;
+    /* Unified luxury warm neutral */
+    color: #2d2d2d;
+    overflow-x: hidden;
+}
+
+.serif-font {
+    font-family: 'Playfair Display', serif;
+}
+
+.script-font {
+    font-family: 'Dancing Script', cursive;
+}
+
+.hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('../assets/img/_F7A5886.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Navbar Styles */
+.nav-scrolled {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    color: #2d2d2d !important;
+}
+
+.nav-scrolled a.border-white\/50 {
+    border-color: #2d2d2d;
+    color: #2d2d2d;
+}
+
+.nav-scrolled a.border-white\/50:hover {
+    background-color: #2d2d2d;
+    color: #fdfbf7;
+}
+
+/* Responsive Section Spacing (Palma Style) */
+.section-padding {
+    padding: 25px 23px;
+}
+
+@media (min-width: 480px) {
+    .section-padding {
+        padding: 45px 30px;
+    }
+}
+
+@media (min-width: 1366px) {
+    .section-padding {
+        padding: 60px 40px;
+    }
+}
+
+/* Swiper Gallery Styles */
+.gallery-content {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.swiper {
+    width: 100%;
+    max-width: 1250px;
+    height: 720px;
+    overflow: visible !important;
+    /* Allow slides to peek out if needed */
+    cursor: grab;
+}
+
+.swiper:active {
+    cursor: grabbing;
+}
+
+.swiper-slide {
+    width: 900px;
+    /* Reduced width so adjacent slides peek in */
+    max-width: 85vw;
+    height: 720px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: flex;
+    justify-content: center;
+}
+
+.swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.4;
+    /* Slightly more faded for out of focus */
+    transform: scale(0.85);
+}
+
+.swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 75%;
+    /* Reduced height to allow vertical offsets */
+    object-fit: cover;
+}
+
+/* Artistic / Messy Placements: one on top, one on bottom */
+.swiper-slide:nth-child(odd) img {
+    align-self: flex-start;
+    margin-top: 2%;
+}
+
+.swiper-slide:nth-child(even) img {
+    align-self: flex-end;
+    margin-bottom: 2%;
+}
+
+.m-bullets-nav {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 10;
+}
+
+.swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background: #113038;
+    /* Dark contrast color */
+    opacity: 0.25;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #113038;
+}
+
+.swiper-pagination-bullet-active:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border: 1px solid #113038;
+    border-radius: 50%;
+}
+
+/* Johannis CSS Grid Logic translated successfully to Tailwind */
+
+/* --- Preloader --- */
+#preloader {
+    pointer-events: none;
+    z-index: 99999;
+}
+
+.preloader-text {
+    color: #2d2d2d;
+}
+
+/* --- SplitType Support --- */
+.line {
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+/* Custom Gallery Cursor */
+.gallery-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background: rgba(20, 30, 20, 0.4);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-cursor.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.gallery-cursor svg {
+    width: 22px;
+    height: 22px;
+    stroke: white;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    opacity: 0;
+}
+
+/* Base Center State */
+.gallery-cursor.cursor-center .svg-bidirectional {
+    opacity: 1;
+}
+
+/* Left State */
+.gallery-cursor.cursor-left .svg-single {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+/* Right State */
+.gallery-cursor.cursor-right .svg-single {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Hide default cursor in gallery when custom is active */
+.gallery-section.cursor-hidden {
+    cursor: none !important;
+}
+
+.gallery-section.cursor-hidden * {
+    cursor: none !important;
+}
+
+/* --- Global Magnetic Cursor --- */
+.global-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background: #c5a059;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+.global-cursor.active {
+    width: 50px;
+    height: 50px;
+    background: rgba(197, 160, 89, 0.2);
+    border: 1px solid #c5a059;
+}
+
+/* --- Sweep Reveal Layer --- */
+.reveal-layer {
+    transform-origin: left;
+}
+
+/* --- Magnetic Element Smoothness --- */
+.magnetic {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
