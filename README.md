@@ -1,6 +1,6 @@
 # Krison Paradise — Cabin Website
 
-*The Perks of Being a Wallflower mood: get out of the noise, find a cabin, let the trees do the talking.*
+A cinematic cabin-site concept using restrained color, asymmetric composition, and a draggable gallery to set the tone.
 
 A cinematic website concept for **Krison Paradise**, presented in the page as a luxury cabin stay in Broken Bow. The current page describes a visual flow from introduction and property philosophy to highlights and an immersive draggable gallery.
 
@@ -19,4 +19,4 @@ The current project is a browser-based HTML page that loads several front-end li
 
 Confirm the property details, location, pricing, availability, photos, accessibility, and booking destination with the owner. Do not present placeholder content as verified lodging information.
 
-*The vibe can be cinematic. The availability calendar still has to be accurate.*
+Atmosphere earns attention; verified property details earn trust.
